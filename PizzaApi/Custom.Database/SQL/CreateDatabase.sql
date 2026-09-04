@@ -1,7 +1,7 @@
 USE [master]
 GO
 
-/****** Object:  Database [PizzaShop]    Script Date: 25.07.2024 09:54:44 ******/
+/****** Object:  Database [PizzaShop]    Script Date: 25.07.2024 09:54:44 
 CREATE DATABASE [PizzaShop]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -15,7 +15,7 @@ IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
 begin
 EXEC [PizzaShop].[dbo].[sp_fulltext_database] @action = 'enable'
 end
-GO
+GO******/
 
 ALTER DATABASE [PizzaShop] SET ANSI_NULL_DEFAULT OFF 
 GO

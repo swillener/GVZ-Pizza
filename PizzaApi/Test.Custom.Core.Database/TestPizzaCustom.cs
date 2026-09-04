@@ -1,4 +1,5 @@
 using Custom.Database.Data;
+using Microsoft.Data.SqlClient;
 
 namespace Test.Custom.Core.Database;
 
@@ -7,9 +8,22 @@ namespace Test.Custom.Core.Database;
 /// </summary>
 [TestClass]
 public class TestPizzaCustom {
+    private const string TEST_DATABASE_SERVER = @"(localdb)\MSSQLLocalDB";
+    private const string TEST_DATABASE_NAME = "PizzaShop_Test";
+
     [TestInitialize]
     public void Initialize() {
+        DataEntities.SetDefaultConnectionString(new SqlConnectionStringBuilder {
+            DataSource = TEST_DATABASE_SERVER,
+            InitialCatalog = TEST_DATABASE_NAME,
+            IntegratedSecurity = true,
+            Encrypt = false,
+            ConnectTimeout = DataEntities.DEFAULT_CONNECT_TIMEOUT_SEC
+        }.ConnectionString);
+
         var dataContext = DataEntities.GetNewInstance();
+        _ = dataContext.Database.EnsureCreated();
+
         // Pizza
         var success = Pizza.Save(dataContext, new Pizza() { Description = "Test Pizza", Diameter = 30, BakingTime = 16.4 }, null);
         Assert.IsTrue(success, "Pizza is not saved");

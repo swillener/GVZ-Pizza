@@ -53,6 +53,15 @@ public partial class DataEntities {
     }
 
     /// <summary>
+    /// Sets the database connection string directly.
+    /// </summary>
+    /// <param name="connectionString"></param>
+    public static void SetDefaultConnectionString(string connectionString) {
+        ArgumentException.ThrowIfNullOrWhiteSpace(connectionString);
+        s_defaultConnectionString = connectionString;
+    }
+
+    /// <summary>
     /// Builds a connection string.
     /// </summary>
     /// <param name="serverName">Server name, e.g. "."</param>
